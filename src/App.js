@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import MuithemProvider from "@material-ui/core/styles/MuiThemeProvider";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+
 import "./App.css";
-//PAge
+//
 import home from "./pages/home";
 import login from "./pages/login";
 import signup from "./pages/signup";
@@ -23,13 +24,15 @@ const theme = createMuiTheme({
       dark: "#F11223",
       contrastText: "#FFF"
     }
+  },typography:{
+    useNextVariants : true,
   }
 });
 
 class App extends Component {
   render() {
     return (
-      <MuithemProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
         <div className="App">
           <Router>
             <Navbar />
@@ -42,7 +45,7 @@ class App extends Component {
             </div>
           </Router>
         </div>
-      </MuithemProvider>
+      </MuiThemeProvider>
     );
   }
 }

@@ -29,11 +29,11 @@
       "not dead",
       "not op_mini all"
     ],
-    "proxy": "https://us-central1-webproject-f896a.cloudfunctions.net/api/",
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy" : "https://us-central1-webproject-f896a.cloudfunctions.net/api"
 }

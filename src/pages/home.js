@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-
 import Scream from "../components/Scream";
 
 class home extends Component {
@@ -10,19 +9,19 @@ class home extends Component {
   };
 
   componentDidMount() {
-    console.log("hola"); 
+    console.log("hola");
     axios
-      .get(
-        "https://us-central1-webproject-f896a.cloudfunctions.net/api/screams"
-      )
-      .then(res => {
-        console.log("res" + res);
-        console.log(res.data);
+      .get("/screams")
+      .then(res => {      
+        
+        console.log(res);
+        
         this.setState({
           screams: res.data
+          
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log("-----> " + err + "<--------------------"));
   }
 
   render() {
@@ -35,7 +34,7 @@ class home extends Component {
     );
 
     return (
-      <Grid container spacing={16}>
+      <Grid container spacing={10}>
         <Grid item sm={8} xs={12}>
           {recentScreamMarkup}
         </Grid>

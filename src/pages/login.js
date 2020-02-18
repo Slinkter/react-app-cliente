@@ -18,14 +18,15 @@ const styles = {
     height: "  70px"
   },
   pageTitle: {
-    margin: "20px auto 10px auto"
+    margin: "20px auto 15px auto"
   },
   textField: {
-    margin: "10px auto 10px auto"
+    margin: "10px auto 15px auto"
   }
 };
 
 class login extends Component {
+  //---------------------------->
   constructor() {
     super();
     this.state = {
@@ -35,38 +36,41 @@ class login extends Component {
       errors: {}
     };
   }
-
-  handleSubmit = event => {
-    event.preventDefault();
+  //---------------------------->
+  handleSubmit = e => {
+    //%%%%%%%%%%%%%%%%%%%
+    e.preventDefault();
+    //%%%%%%%%%%%%%%%%%%%
     this.setState({
       loading: true
     });
+    //%%%%%%%%%%%%%%%%%%%
     const userData = {
       email: this.state.email,
       password: this.state.password
     };
+    //%%%%%%%%%%%%%%%%%%%
     axios
-      .post("https://us-central1-webproject-f896a.cloudfunctions.net/api/login", userData)
+      .post("/login", userData)
       .then(res => {
         console.log(res.data);
         this.setState({
           loading: false
         });
-
         this.props.history.push("/");
       })
       .catch(err => {
         this.setState({
-         
+          errors: err.response.data,
           loading: false
         });
       });
   };
-
+  //---------------------------->
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
+  //---------------------------->
   render() {
     const { classes } = this.props;
     const { errors, loading } = this.state;
@@ -74,9 +78,9 @@ class login extends Component {
       <Grid container className={classes.form}>
         <Grid item sm />
         <Grid item sm>
-          <img src={AppIcon} className={classes.image} alt="adsad" />
-          <Typography variant="h3" className={classes.pagetitle}>
-            Login{" "}
+          <img className={classes.image} src={AppIcon} alt="adsad" />
+          <Typography className={classes.pagetitle} variant="h2">
+            Login
           </Typography>
           <form noValidate onSubmit={this.handleSubmit}>
             <TextField
@@ -103,6 +107,11 @@ class login extends Component {
               onChange={this.handleChange}
               fullWidth
             />
+            {errors.general && (
+              <Typography variant="body2" className={classes.customError}>
+                {errors.general}
+              </Typography>
+            )}
             <Button
               type="submit"
               variant="contained"
@@ -110,7 +119,7 @@ class login extends Component {
               className={classes.Button}
               value="Enviar "
             >
-              Enviar{" "}
+              Enviar
             </Button>
           </form>
         </Grid>
@@ -119,5 +128,9 @@ class login extends Component {
     );
   }
 }
-
+/*
+login.prototype = {
+  classes : PropTypes.object.isRequired
+}
+*/
 export default withStyles(styles)(login);
