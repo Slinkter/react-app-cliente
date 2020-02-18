@@ -6,8 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
-//
 import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
+import { CircularProgress } from '@material-ui/core';
 
 const styles = {
   form: {
@@ -22,6 +23,14 @@ const styles = {
   },
   textField: {
     margin: "10px auto 15px auto"
+  },
+  customError: {
+    color: "blue",
+    fontSize: "0.82rem",
+    margin: "10px 0 10px 0 "
+  },
+  progress : {
+    position : 'absolute'
   }
 };
 
@@ -118,9 +127,17 @@ class login extends Component {
               color="primary"
               className={classes.Button}
               value="Enviar "
+              disabled = {loading}
             >
-              Enviar
+              Login
+              {loading && (
+                <CircularProgress size={30} className = {classes.progress}/>
+              ) }
             </Button>
+            <br></br>
+            <small>
+              Do not have an account ? sign up <Link to="/signup"> here</Link>
+            </small>
           </form>
         </Grid>
         <Grid item sm />
