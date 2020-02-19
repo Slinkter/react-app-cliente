@@ -63,6 +63,8 @@ class login extends Component {
       .post("/login", userData)
       .then(res => {
         console.log(res.data);
+        
+        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
         this.setState({
           loading: false
         });
@@ -89,7 +91,7 @@ class login extends Component {
         <Grid item sm>
           <img className={classes.image} src={AppIcon} alt="adsad" />
           <Typography className={classes.pagetitle} variant="h2">
-            Login
+            signup
           </Typography>
           <form noValidate onSubmit={this.handleSubmit}>
             <TextField
@@ -116,6 +118,30 @@ class login extends Component {
               onChange={this.handleChange}
               fullWidth
             />
+             <TextField
+              id="confirPassword"
+              name="confirPassword"
+              type="password"
+              label="Confirm Password"
+              className={classes.textField}
+              helperText={errors.confirmpassword}
+              error={errors.confirmpassword ? true : false}
+              value={this.state.confirmpassword}
+              onChange={this.handleChange}
+              fullWidth
+            />
+             <TextField
+              id="handle"
+              name="handle"
+              type="text"
+              label="Handle"
+              className={classes.textField}
+              helperText={errors.handle}
+              error={errors.handle ? true : false}
+              value={this.state.handle}
+              onChange={this.handleChange}
+              fullWidth
+            />
             {errors.general && (
               <Typography variant="body2" className={classes.customError}>
                 {errors.general}
@@ -129,14 +155,14 @@ class login extends Component {
               value="Enviar "
               disabled = {loading}
             >
-              Login
+              Signup 
               {loading && (
                 <CircularProgress size={30} className = {classes.progress}/>
               ) }
             </Button>
             <br></br>
             <small>
-              Do not have an account ? sign up <Link to="/signup"> here</Link>
+              Already have an account  ? login <Link to="/login"> here</Link>
             </small>
           </form>
         </Grid>
@@ -145,9 +171,5 @@ class login extends Component {
     );
   }
 }
-/*
-login.prototype = {
-  classes : PropTypes.object.isRequired
-}
-*/
+
 export default withStyles(styles)(login);

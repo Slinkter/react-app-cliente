@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import jwtDecode from 'jwt-decode'
 
 import "./App.css";
 //
@@ -24,10 +25,41 @@ const theme = createMuiTheme({
       dark: "#F11223",
       contrastText: "#FFF"
     }
-  },typography:{
-    useNextVariants : true,
+  },
+  typography: {
+    useNextVariants: true
+  },
+  form: {
+    textAlign: "center"
+  },
+  image: {
+    margin: "20px auto 20px auto",
+    height: "  70px"
+  },
+  pageTitle: {
+    margin: "20px auto 15px auto"
+  },
+  textField: {
+    margin: "10px auto 15px auto"
+  },
+  customError: {
+    color: "blue",
+    fontSize: "0.82rem",
+    margin: "10px 0 10px 0 "
+  },
+  progress: {
+    position: "absolute"
   }
 });
+
+const token = localStorage.FBIdToken ;
+if(token ){
+  const decodeToken = jwtDecode(token);
+  console.log(decodeToken);
+  
+}
+
+
 
 class App extends Component {
   render() {
