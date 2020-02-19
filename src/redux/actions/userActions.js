@@ -16,7 +16,7 @@ export const loginUser = (userData , history) => dispatch => {
       const FBIdToken = `Bearer ${res.data.token}`
       localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
       axios.defaults.headers.common['Authorization']= FBIdToken;
-      this.props.history.push("/");
+      history.push("/");
     })
     .catch(err => {
       this.setState({
