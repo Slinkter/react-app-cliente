@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import Scream from "../components/Scream";
-
-Profiler
+import Profile from '../components/Profile'
 
 class home extends Component {
   state = {
