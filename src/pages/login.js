@@ -8,8 +8,13 @@ import Button from "@material-ui/core/Button";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
-import { CircularProgress } from '@material-ui/core';
-// github 
+import { CircularProgress } from "@material-ui/core";
+
+// Redux stuff
+
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
+// github
 const styles = {
   form: {
     textAlign: "center"
@@ -29,8 +34,8 @@ const styles = {
     fontSize: "0.82rem",
     margin: "10px 0 10px 0 "
   },
-  progress : {
-    position : 'absolute'
+  progress: {
+    position: "absolute"
   }
 };
 
@@ -45,18 +50,23 @@ class login extends Component {
     };
   }
   //---------------------------->
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors });
+    }
+  }
   handleSubmit = e => {
     //%%%%%%%%%%%%%%%%%%%
     e.preventDefault();
     //%%%%%%%%%%%%%%%%%%%
-    
+
     //%%%%%%%%%%%%%%%%%%%
     const userData = {
       email: this.state.email,
       password: this.state.password
     };
     //%%%%%%%%%%%%%%%%%%%
- 
+    this.props.loginUser(userData, this.props.history);
   };
   //---------------------------->
   handleChange = event => {
@@ -64,8 +74,11 @@ class login extends Component {
   };
   //---------------------------->
   render() {
-    const { classes } = this.props;
-    const { errors, loading } = this.state;
+    const {
+      classes,
+      UI: { loading }
+    } = this.props;
+    const { errors } = this.state;
     return (
       <Grid container className={classes.form}>
         <Grid item sm />
@@ -110,12 +123,12 @@ class login extends Component {
               color="primary"
               className={classes.Button}
               value="Enviar "
-              disabled = {loading}
+              disabled={loading}
             >
               Login
               {loading && (
-                <CircularProgress size={30} className = {classes.progress}/>
-              ) }
+                <CircularProgress size={30} className={classes.progress} />
+              )}
             </Button>
             <br></br>
             <small>
@@ -128,9 +141,24 @@ class login extends Component {
     );
   }
 }
-/*
-login.prototype = {
-  classes : PropTypes.object.isRequired
-}
-*/
-export default withStyles(styles)(login);
+
+login.protoType = {
+  classes: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  user: state.user,
+  UI: state.UI
+});
+
+const mapActionsToProps = {
+  loginUser
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(login));
