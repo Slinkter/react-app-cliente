@@ -5,7 +5,7 @@ import AppIcon from "../images/icon.jpg";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import axios from "axios";
+
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
@@ -56,16 +56,11 @@ class login extends Component {
     }
   }
   handleSubmit = e => {
-    //%%%%%%%%%%%%%%%%%%%
-    e.preventDefault();
-    //%%%%%%%%%%%%%%%%%%%
-
-    //%%%%%%%%%%%%%%%%%%%
+    e.preventDefault();  
     const userData = {
       email: this.state.email,
       password: this.state.password
-    };
-    //%%%%%%%%%%%%%%%%%%%
+    };   
     this.props.loginUser(userData, this.props.history);
   };
   //---------------------------->
