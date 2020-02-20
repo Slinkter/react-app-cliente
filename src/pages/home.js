@@ -3,6 +3,8 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import Scream from "../components/Scream";
 
+Profiler
+
 class home extends Component {
   state = {
     screams: null
