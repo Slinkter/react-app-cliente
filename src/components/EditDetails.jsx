@@ -14,6 +14,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 
+import MyButton from '../util/MyButton'
+
 const styles = theme => ({
   ...theme
 });
@@ -67,6 +69,12 @@ class EditDetails extends Component {
               <EditIcon color="primary" />
             </IconButton>
           </Tooltip>
+
+        <MyButton tip="Edit details " onClick={this.handleOpen} btnClassName = {classes.button}>
+          <EditIcon color ="primary"></EditIcon>
+        </MyButton>
+
+
           <Dialog
             open={this.state.open}
             onClose={this.handleClose}
