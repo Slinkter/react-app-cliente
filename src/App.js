@@ -21,7 +21,6 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser, getUserData } from "./redux/actions/userActions";
 import { getUserDate } from "./redux/actions/userActions";
 
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -76,7 +75,7 @@ if (token) {
       })
     );
 
-    axios.defaults.headers.common['Authorization'] = token
+    axios.defaults.headers.common["Authorization"] = token;
     store.dispatch(getUserDate());
   }
 }
@@ -91,16 +90,8 @@ class App extends Component {
             <div className="container">
               <Switch>
                 <Route path="/" exact component={home} />
-                <AuthRoute
-                  path="/login"
-                  component={login}
-                  
-                />
-                <AuthRoute
-                  path="/signup"
-                  component={signup}
-                  
-                />
+                <AuthRoute path="/login" component={login} />
+                <AuthRoute path="/signup" component={signup} />
               </Switch>
             </div>
           </Router>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import Scream from "../components/Scream";
-import Profile from '../components/Profile'
+import Profile from "../components/Profile";
 
 class home extends Component {
   state = {
@@ -10,16 +10,14 @@ class home extends Component {
   };
 
   componentDidMount() {
-    console.log("hola");
+    
     axios
       .get("/screams")
-      .then(res => {      
-        
+      .then(res => {
         console.log(res);
-        
+
         this.setState({
           screams: res.data
-          
         });
       })
       .catch(err => console.log("-----> " + err + "<--------------------"));
@@ -40,7 +38,7 @@ class home extends Component {
           {recentScreamMarkup}
         </Grid>
         <Grid item sm={4} xs={12}>
-          <p> Profile...</p>
+         <Profile></Profile>
         </Grid>
       </Grid>
     );
