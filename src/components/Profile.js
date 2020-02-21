@@ -8,14 +8,19 @@ import Button from "@material-ui/core/Button";
 import MuiLink from "@material-ui/core/Link";
 import { Paper } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
 //
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import { CalendarToday } from "@material-ui/icons/CalendarToday";
+import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
 //
 import dayjs from "dayjs";
 
-const styles = (theme) => ({
+import {logoutUser,uploadImage} from '../redux/actions/userActions'
+
+const styles = theme => ({
   paper: {
     padding: 20
   },
@@ -64,6 +69,21 @@ const styles = (theme) => ({
 });
 
 class Profile extends Component {
+  handleImageChange = event => {
+    const image = event.target.files[0];
+    const formDate = new FormData();
+
+    formDate.append('image',image,image.name ) ;
+    this.props.uploadImage(FormData);
+  };
+
+  handleEditPicture = () => {
+    const fileInput = document.getElementById("imageInput");
+    fileInput.click();
+  };
+
+  
+
   render() {
     const {
       classes,
@@ -79,7 +99,17 @@ class Profile extends Component {
         <Paper className={classes.paper}>
           <div className={classes.profile}>
             <div className="image-wrapper">
-              <img scr={imageUrl} alt="profile" className="profile-image"/>
+              <img scr={imageUrl} alt="profile" className="profile-image" />
+              <input
+                type="file"
+                id="imageInput"
+                onChange={this.handleImageChange}
+              />
+              <Tooltip title="Edite profile picture" placeholder="image">
+                <IconButton onClick={this.handleEditPicture} className="button">
+                  <EditIcon color="primary" />
+                </IconButton>
+              </Tooltip>
             </div>
             <hr />
             <div className="profile-details">
@@ -145,7 +175,6 @@ class Profile extends Component {
       )
     ) : (
       <p>loading...que raro</p>
- 
     );
 
     return profileMarkup;
@@ -156,9 +185,14 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
+const mapActionsToProps = {logoutUser,uploadImage};
+
+
 Profile.protoType = {
+  logoutUser : PropTypes.func.isRequired,
+  uploadImage : PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Profile));
+export default connect(mapStateToProps,mapActionsToProps)(withStyles(styles)(Profile));
