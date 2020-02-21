@@ -10,7 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
-const style = {
+const styles = {
   card: {
     display: " flex",
     marginBottom: 20
@@ -26,9 +26,7 @@ const style = {
 
 class Scream extends Component {
   render() {
-
     dayjs.extend(relativeTime);
-    
     const {
       classes,
       scream: {
@@ -41,7 +39,6 @@ class Scream extends Component {
         commentCount
       }
     } = this.props;
-
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -51,7 +48,7 @@ class Scream extends Component {
         />
         <CardContent className={classes.content}>
           <Typography
-            variant="h4"
+            variant="h5"
             component={Link}
             to={`/users/${userHandle}`}
             color="primary"
@@ -61,13 +58,11 @@ class Scream extends Component {
           <Typography variant="body2" color="textSecondary">
             {dayjs(createdAt).fromNow()}
           </Typography>
-          <Typography variant="body1" color="textSecondary">
-            {body}
-          </Typography>
+          <Typography variant="body1">{body}</Typography>
         </CardContent>
       </Card>
     );
   }
 }
 
-export default withStyles(style)(Scream);
+export default withStyles(styles)(Scream);
