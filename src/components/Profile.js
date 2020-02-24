@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import EditDetails from "./EditDetails";
-import MyButton from '../util/MyButton'
+import MyButton from "../util/MyButton";
 //
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
@@ -22,7 +22,6 @@ import dayjs from "dayjs";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 import { logoutUser, uploadImage } from "../redux/actions/userActions";
-
 const styles = theme => ({
   paper: {
     padding: 20
@@ -50,7 +49,7 @@ const styles = theme => ({
         verticalAlign: "middle"
       },
       "& a": {
-        color: "red"
+        color: theme.palette.primary.main
       }
     },
     "& hr": {
@@ -107,7 +106,6 @@ class Profile extends Component {
                 hidden="hidden"
                 onChange={this.handleImageChange}
               />
-
               <MyButton
                 tip="Edit profile picture"
                 onClick={this.handleEditPicture}
@@ -148,11 +146,9 @@ class Profile extends Component {
               <CalendarToday color="primary" />{" "}
               <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
             </div>
-
             <MyButton tip="Logout" onClick={this.handleLogout}>
               <KeyboardReturn color="primary" />
             </MyButton>
-
             <EditDetails />
           </div>
         </Paper>

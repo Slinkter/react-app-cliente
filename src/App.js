@@ -19,7 +19,7 @@ import store from "./redux/store";
 
 import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser, getUserData } from "./redux/actions/userActions";
-import { getUserDate } from "./redux/actions/userActions";
+
 
 const theme = createMuiTheme({
   palette: {
@@ -76,7 +76,7 @@ if (token) {
     );
 
     axios.defaults.headers.common["Authorization"] = token;
-    store.dispatch(getUserDate());
+    store.dispatch(getUserData());
   }
 }
 
